@@ -1,3 +1,138 @@
 {% extends 'base.html' %}
 {% block content %}
+    <br>
+    <div class="container" >
+        <div class="row">
+
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    <h2>Manage <b>Employees</b> <button type="button" class="btn btn-success float-right"
+                    data-toggle="modal" data-target="#mymodal">Add new Employees
+                    </button></h2>
+
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Last name</th>
+                            <th>Age</th>
+                            <th>Experience</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for e in employees %}
+                        <tr>
+                            <th>{{ e.name }}</th>
+                            <th>{{ e.last_name }}</th>
+                            <th>{{ e.age }}</th>
+                            <th>{{ e.exp }}</th>
+                            <th>
+                                <a href="/update/{{ e.id }}" class="btn btn-warning btn-xs"
+                                   data-toggle="modal" data-target="#modaledit{{ e.id }}">Edit</a>
+
+                                <a href="/delete/{{ e.id }}" class="btn btn-danger btn-xs"
+                                   onclick="return confirm('Are You Sure To Delete')">Delete</a>
+                            </th>
+                        </tr>
+
+                        <!--Modal for adding -->
+                        <div id="mymodal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">
+                                            Add Employee
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="{{ url_for('insert') }}" method="POST">
+
+                                            <div class="form-group">
+                                                <label>Name:</label>
+                                                <input type="text" class="form-control" name="name" required="1">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Last Name:</label>
+                                                <input type="text" class="form-control" name="last_name" required="1">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Age:</label>
+                                                <input type="number" class="form-control" name="age" required="1">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Experience:</label>
+                                                <input type="number" class="form-control" name="exp" required="1">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button class="btn btn-primary" type="submit">Add Employee</button>
+                                            </div>
+
+                                        </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Modal for adding -->
+
+                        <div id="modaledit{{ e.id }}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">
+                                            Update Information
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="{{ url_for('update') }}" method="POST">
+
+                                            <div class="form-group">
+                                                <label>Name:</label>
+                                                <input type="hidden" name="id" value="{{ e.id }}">
+                                                <input type="text" class="form-control" name="name" value="{{ e.name }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Last Name:</label>
+                                                <input type="text" class="form-control" name="last_name" value="{{ e.last_name }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Age:</label>
+                                                <input type="number" class="form-control" name="age" value="{{ e.age }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Experience:</label>
+                                                <input type="number" class="form-control" name="exp" value="{{ e.exp }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button class="btn btn-primary" type="submit">Update</button>
+                                            </div>
+
+                                        </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br>
 {% endblock %}

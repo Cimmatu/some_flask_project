@@ -1,0 +1,45 @@
+
+<div id="mymodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Add Employee
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ url_for('insert') }}" method="POST">
+
+                    <div class="form-group">
+                        <label></label>
+                        <input type="text" class="form-control" name="name" required="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Last Name:</label>
+                        <input type="text" class="form-control" name="last_name" required="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Age:</label>
+                        <input type="number" class="form-control" name="age" required="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Experience:</label>
+                        <input type="number" class="form-control" name="exp" required="1">
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Add Employee</button>
+                    </div>
+
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
